@@ -4,22 +4,25 @@ using System.Collections;
 
 public class TimeScript : MonoBehaviour
 {
+
 	private float time = 60;
 	public ballScript BallScript;
 	//********** 追記 **********// 
 	public GameObject exchangeButton;
 	public GameObject gameOverText;
-	//********** 追記 **********// 
-
+	public GameObject sukiruButton;
+	//********** 追記 **********//
+	public Text timeText;
 	void Start()
 	{
 		//********** 追記 **********// 
 		gameOverText.SetActive(false);
 		//********** 追記 **********// 
-		GetComponent<Text>().text = ((int)time).ToString();
+		timeText = GetComponent<Text>();
+		timeText.text = ((int)time).ToString();
 	}
 
-	void Update()
+     public void Update()
 	{
 		time -= Time.deltaTime;
 		//********** 追記 **********// 
@@ -27,9 +30,9 @@ public class TimeScript : MonoBehaviour
 		{
 			StartCoroutine("GameOver");
 		}
-		//********** 追記 **********// 
+		//********* 追記 **********// 
 		if (time < 0) time = 0;
-		GetComponent<Text>().text = ((int)time).ToString();
+		 timeText.text = ((int)time).ToString();
 	}
 	//********** 追記 **********// 
 	IEnumerator GameOver()
@@ -43,5 +46,11 @@ public class TimeScript : MonoBehaviour
 			Application.LoadLevel("title");
 		}
 	}
-	//********** 追記 **********// 
+	public void AddTime(float amountTime)
+	{
+		Debug.Log(amountTime);
+		time += amountTime;
+		
+		Debug.Log(time);
+	}
 }
