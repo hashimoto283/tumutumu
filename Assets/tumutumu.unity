@@ -620,7 +620,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 424740715}
-        m_MethodName: Timer
+        m_MethodName: ChangeColorSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -960,6 +960,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db066c36be46f7646a1beb41e0fa77c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballList_yellow: []
+  ballList_blue: []
+  ballList_red: []
+  ballList_green: []
+  ballList_purple: []
   ballPrefab: {fileID: 7934430546720136535, guid: 3948666dfa6838949b3308ab3584baad,
     type: 3}
   ballSprites:
@@ -1381,6 +1386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BallScript: {fileID: 837790347}
+  ballPrefab: {fileID: 0}
+  ballSprites: []
 --- !u!114 &1536257964
 MonoBehaviour:
   m_ObjectHideFlags: 0

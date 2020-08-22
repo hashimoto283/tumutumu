@@ -8,8 +8,7 @@ public class sukiru : MonoBehaviour
 
     public float additionalTime;
     private TimeScript timeScript;
-
-
+    private ballScript ballScript;
     public void Timer()
     {
        timeScript= GameObject.Find("Time").GetComponent<TimeScript>();
@@ -23,5 +22,10 @@ public class sukiru : MonoBehaviour
       
        
     }
-    
+    public void ChangeColorSkill()
+    {
+        ballScript = GameObject.Find("Main Camera").GetComponent<ballScript>();
+        ballScript.ChangeColor();
+
+    }
 }

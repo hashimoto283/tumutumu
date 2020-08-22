@@ -5,6 +5,11 @@ using System.Collections.Generic;
 
 public class ballScript : MonoBehaviour
 {
+	public List<GameObject> ballList_yellow = new List<GameObject>();
+	public List<GameObject> ballList_blue = new List<GameObject>();
+	public List<GameObject> ballList_red = new List<GameObject>();
+	public List<GameObject> ballList_green = new List<GameObject>();
+	public List<GameObject> ballList_purple = new List<GameObject>();
 
 	public GameObject ballPrefab;
 	public Sprite[] ballSprites;
@@ -18,6 +23,7 @@ public class ballScript : MonoBehaviour
 	//********** 追記 **********//
 	public bool isPlaying = true;
 	//********** 追記 **********//
+	private BallController ballController;
 
 	void Start()
 	{
@@ -110,6 +116,8 @@ public class ballScript : MonoBehaviour
 
 	IEnumerator DropBall(int count)
 	{
+
+		
 		if (count == 50)
 		{
 			StartCoroutine("RestrictPush");
@@ -117,16 +125,64 @@ public class ballScript : MonoBehaviour
 		for (int i = 0; i < count; i++)
 		{
 			Vector2 pos = new Vector2(Random.Range(-2.0f, 2.0f), 7f);
+			//ボールプレファブを生成する　プレファブの生成角度をRandom.Rangeで決める
 			GameObject ball = Instantiate(ballPrefab, pos,
-				Quaternion.AngleAxis(Random.Range(-40, 40), Vector3.forward)) as GameObject;
+			Quaternion.AngleAxis(Random.Range(-40, 40), Vector3.forward)) as GameObject;
+			//ボールの種類をランダムに決める
 			int spriteId = Random.Range(0, 5);
+			//生成するボールの名前をPiyo0~4に決めている
 			ball.name = "Piyo" + spriteId;
+			//SpriteRenderer型のspriteObj変数を宣言して、ballObjectの持っているSpriteRendererを代入
 			SpriteRenderer spriteObj = ball.GetComponent<SpriteRenderer>();
+			//配列でボールの絵を5種類のPiyoに差し替える
 			spriteObj.sprite = ballSprites[spriteId];
-			yield return new WaitForSeconds(0.05f);
-		}
-	}
+			//リストでball変数で管理
+			if (spriteId == 0)
+			{
+				ballList_yellow.Add(ball);
+			}
+			else if (spriteId == 1)
+			{
+				ballList_blue.Add(ball);
 
+			}
+			else if (spriteId == 2)
+            {
+				ballList_red.Add(ball);
+
+            }
+			else if (spriteId == 3) 
+            {
+				ballList_green.Add(ball);
+
+            }
+			else if (spriteId == 4)
+            {
+				ballList_purple.Add(ball);
+            }
+    
+			
+			//0.05秒停止する処理
+			yield return new WaitForSeconds(0.05f);
+			
+		
+
+		}
+
+	}
+	public void ChangeColor()
+    {
+
+		//カラーナンバーが0だった場合カラーナンバー１にする（ボールリストナンバーイエローをボールリストナンバーブルーに変更）
+		for (int i = 0; i < ballList_yellow.Count; i++)
+        {
+			ballList_yellow[i].GetComponent<SpriteRenderer>().sprite = ballSprites[1];
+			ballList_blue.Add(ballList_yellow[i]);
+			ballList_yellow.Remove(ballList_yellow[i]);
+        }
+		ballList_yellow.Clear();
+			
+    }
 	IEnumerator RestrictPush()
 	{
 		exchangeButton.GetComponent<Button>().interactable = false;
