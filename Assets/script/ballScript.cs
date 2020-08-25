@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ballScript : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class ballScript : MonoBehaviour
 		//********** 追記 **********//
 	}
 
-	private void OnDragStart()
+	public void OnDragStart()
 	{
 		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
@@ -96,12 +97,61 @@ public class ballScript : MonoBehaviour
 		int remove_cnt = removableBallList.Count;
 		if (remove_cnt >= 3)
 		{
-			for (int i = 0; i < remove_cnt; i++)
+
+			GameObject removableobj = removableBallList[0];
+			if (ballList_yellow.Count > 0 && ballList_yellow[0].name.StartsWith(removableobj.name))
 			{
-				Destroy(removableBallList[i]);
+				Debug.Log ("yellow");
+				for (int i = 0; i < remove_cnt; i++)
+				{
+					ballList_yellow.Remove(removableBallList[i]);
+					Destroy(removableBallList[i]);
+				}
 			}
+			else if (ballList_blue.Count > 0 && ballList_blue[0].name.StartsWith(removableobj.name))
+			{
+				Debug.Log("blue");
+				for (int i = 0; i < remove_cnt; i++)
+				{
+					ballList_blue.Remove(removableBallList[i]);
+					Destroy(removableBallList[i]);
+
+				}
+			}
+			else if (ballList_red.Count > 0 && ballList_red[0].name.StartsWith(removableobj.name))
+			{
+				Debug.Log("red");
+				for (int i = 0; i < remove_cnt; i++)
+				{
+					ballList_red.Remove(removableBallList[i]);
+					Destroy(removableBallList[i]);
+				}
+			}
+			else if (ballList_green.Count > 0 && ballList_green[0].name.StartsWith (removableobj.name))
+            {
+				Debug.Log("green");
+				for(int i=0;i<remove_cnt;i++)
+                {
+					ballList_green.Remove(removableBallList[i]);
+					Destroy(removableBallList[i]);
+
+                }
+            }
+			else if(ballList_purple.Count>0 && ballList_purple[0].name.StartsWith(removableobj.name))
+            {
+				Debug.Log("purple");
+				for(int i=0;i<remove_cnt;i++)
+                {
+					ballList_purple.Remove(removableBallList[i]);
+					Destroy(removableBallList[i]);
+                }
+            }
+			removableBallList = new List<GameObject>();
 			scoreGUI.SendMessage("AddPoint", point * remove_cnt);
 			StartCoroutine(DropBall(remove_cnt));
+	
+		
+				
 		}
 		else
 		{
@@ -114,10 +164,10 @@ public class ballScript : MonoBehaviour
 		lastBall = null;
 	}
 
-	IEnumerator DropBall(int count)
+	public IEnumerator DropBall(int count)
 	{
 
-		
+
 		if (count == 50)
 		{
 			StartCoroutine("RestrictPush");
@@ -147,42 +197,47 @@ public class ballScript : MonoBehaviour
 
 			}
 			else if (spriteId == 2)
-            {
+			{
 				ballList_red.Add(ball);
 
-            }
-			else if (spriteId == 3) 
-            {
+			}
+			else if (spriteId == 3)
+			{
 				ballList_green.Add(ball);
 
-            }
+			}
 			else if (spriteId == 4)
-            {
+			{
 				ballList_purple.Add(ball);
-            }
-    
-			
+			}
+
+
 			//0.05秒停止する処理
 			yield return new WaitForSeconds(0.05f);
-			
-		
+
+
 
 		}
 
 	}
 	public void ChangeColor()
-    {
+	{
 
-		//カラーナンバーが0だった場合カラーナンバー１にする（ボールリストナンバーイエローをボールリストナンバーブルーに変更）
+		//ボールリストナンバーイエローをボールリストナンバーブルーに変更
 		for (int i = 0; i < ballList_yellow.Count; i++)
-        {
+		{
 			ballList_yellow[i].GetComponent<SpriteRenderer>().sprite = ballSprites[1];
+
+			ballList_yellow[i].name = "Piyo" + 1;
 			ballList_blue.Add(ballList_yellow[i]);
-			ballList_yellow.Remove(ballList_yellow[i]);
-        }
-		ballList_yellow.Clear();
+			Debug.Log(ballList_yellow.Count);
+			//ballList_yellow.Remove(ballList_yellow[i]);
+
 			
-    }
+		}
+		ballList_yellow.Clear();
+
+	}
 	IEnumerator RestrictPush()
 	{
 		exchangeButton.GetComponent<Button>().interactable = false;
@@ -200,5 +255,7 @@ public class ballScript : MonoBehaviour
 	{
 		SpriteRenderer ballTexture = obj.GetComponent<SpriteRenderer>();
 		ballTexture.color = new Color(ballTexture.color.r, ballTexture.color.g, ballTexture.color.b, transparency);
+		
+		
 	}
-}
+}	

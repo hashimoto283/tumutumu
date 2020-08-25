@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 424740712}
   - component: {fileID: 424740715}
   m_Layer: 5
-  m_Name: sukiru
+  m_Name: sukill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1386,8 +1386,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BallScript: {fileID: 837790347}
-  ballPrefab: {fileID: 0}
-  ballSprites: []
 --- !u!114 &1536257964
 MonoBehaviour:
   m_ObjectHideFlags: 0

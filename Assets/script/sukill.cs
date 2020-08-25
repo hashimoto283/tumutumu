@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class sukiru : MonoBehaviour
+public class sukill : MonoBehaviour
 {
 
     public float additionalTime;
@@ -26,6 +26,6 @@ public class sukiru : MonoBehaviour
     {
         ballScript = GameObject.Find("Main Camera").GetComponent<ballScript>();
         ballScript.ChangeColor();
-
+        Debug.Log("a");
     }
 }
