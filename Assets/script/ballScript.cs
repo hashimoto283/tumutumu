@@ -92,7 +92,7 @@ public class ballScript : MonoBehaviour
 		}
 	}
 
-	private void OnDragEnd()
+	public void OnDragEnd()
 	{
 		int remove_cnt = removableBallList.Count;
 		if (remove_cnt >= 3)
@@ -101,7 +101,7 @@ public class ballScript : MonoBehaviour
 			GameObject removableobj = removableBallList[0];
 			if (ballList_yellow.Count > 0 && ballList_yellow[0].name.StartsWith(removableobj.name))
 			{
-				Debug.Log ("yellow");
+				Debug.Log("yellow");
 				for (int i = 0; i < remove_cnt; i++)
 				{
 					ballList_yellow.Remove(removableBallList[i]);
@@ -127,31 +127,31 @@ public class ballScript : MonoBehaviour
 					Destroy(removableBallList[i]);
 				}
 			}
-			else if (ballList_green.Count > 0 && ballList_green[0].name.StartsWith (removableobj.name))
-            {
+			else if (ballList_green.Count > 0 && ballList_green[0].name.StartsWith(removableobj.name))
+			{
 				Debug.Log("green");
-				for(int i=0;i<remove_cnt;i++)
-                {
+				for (int i = 0; i < remove_cnt; i++)
+				{
 					ballList_green.Remove(removableBallList[i]);
 					Destroy(removableBallList[i]);
 
-                }
-            }
-			else if(ballList_purple.Count>0 && ballList_purple[0].name.StartsWith(removableobj.name))
-            {
+				}
+			}
+			else if (ballList_purple.Count > 0 && ballList_purple[0].name.StartsWith(removableobj.name))
+			{
 				Debug.Log("purple");
-				for(int i=0;i<remove_cnt;i++)
-                {
+				for (int i = 0; i < remove_cnt; i++)
+				{
 					ballList_purple.Remove(removableBallList[i]);
 					Destroy(removableBallList[i]);
-                }
-            }
+				}
+			}
 			removableBallList = new List<GameObject>();
 			scoreGUI.SendMessage("AddPoint", point * remove_cnt);
 			StartCoroutine(DropBall(remove_cnt));
-	
-		
-				
+
+
+
 		}
 		else
 		{
@@ -233,7 +233,7 @@ public class ballScript : MonoBehaviour
 			Debug.Log(ballList_yellow.Count);
 			//ballList_yellow.Remove(ballList_yellow[i]);
 
-			
+
 		}
 		ballList_yellow.Clear();
 
@@ -255,7 +255,79 @@ public class ballScript : MonoBehaviour
 	{
 		SpriteRenderer ballTexture = obj.GetComponent<SpriteRenderer>();
 		ballTexture.color = new Color(ballTexture.color.r, ballTexture.color.g, ballTexture.color.b, transparency);
-		
-		
+
+
+
 	}
-}	
+	public void DeleteBall()
+	{
+		int[] array = new int[5];
+		array[0] = ballList_yellow.Count;
+		array[1] = ballList_blue.Count;
+		array[2] = ballList_red.Count;
+		array[3] = ballList_green.Count;
+		array[4] = ballList_purple.Count;
+		//数が多い配列を比べて選ぶ処理
+		int maxNum = array[0];
+		int index = 0;
+		for (int i = 1; i < array.Length; i++)
+		{
+			if (maxNum < array[i])
+			{
+				maxNum = array[i];
+				index = i;
+			}
+		}
+		Debug.Log(maxNum);
+		Debug.Log(index);
+
+		if (index == 0)
+		{
+			for (int i = 0; i < ballList_yellow.Count; i++)
+            {
+				
+				Destroy(ballList_yellow[i]);
+			}
+			ballList_yellow.Clear();
+		}
+		else if (index == 1)
+		{
+			for (int i = 0; i < ballList_blue.Count; i++)
+			{
+				
+				Destroy(ballList_blue[i]);
+			}
+			ballList_blue.Clear();
+		}
+		else if (index == 2)
+        {
+			for (int i = 0; i < ballList_red.Count; i++)
+			{
+				
+				Destroy(ballList_red[i]);
+			}
+			ballList_red.Clear();
+		}
+		else if (index == 3)
+        {
+			for (int i = 0; i < ballList_green.Count; i++)
+			{
+				
+				Destroy(ballList_green[i]);
+			}
+			ballList_green.Clear();
+		}
+		else if (index == 4)
+        {
+			for (int i = 0; i < ballList_purple.Count; i++)
+			{
+				
+				Destroy(ballList_purple[i]);
+			}
+			ballList_purple.Clear();
+		}
+
+		StartCoroutine(DropBall(maxNum));
+	scoreGUI.SendMessage("AddPoint", point * maxNum);
+	}
+}
