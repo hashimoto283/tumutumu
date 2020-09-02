@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 919696254930135969}
   - component: {fileID: 919696254930135982}
-  - component: {fileID: 7971463720909573118}
   m_Layer: 0
   m_Name: kyara2
   m_TagString: Untagged
@@ -82,16 +81,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7971463720909573118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919696254930135983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7dfe18125867d489d9aaf1dcb395e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charaSkillType: 1
