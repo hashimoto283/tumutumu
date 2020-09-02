@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TimeScript : MonoBehaviour
 {
@@ -43,7 +44,8 @@ public class TimeScript : MonoBehaviour
 		yield return new WaitForSeconds(2.0f);
 		if (Input.GetMouseButtonDown(0))
 		{
-			Application.LoadLevel("title");
+			string sceneName = SceneManager.GetActiveScene().name;
+			SceneManager.LoadScene("sceneName");
 		}
 	}
 	public void AddTime(float amountTime)
