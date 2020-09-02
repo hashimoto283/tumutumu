@@ -4,6 +4,7 @@ using System.Collections;
 public class ScoreScript : MonoBehaviour
 {
 	private int score = 0;
+	public Stege2 stege2; 
 	void Start()
 	{
 		//初期スコア(0点)を表示
@@ -14,6 +15,7 @@ public class ScoreScript : MonoBehaviour
 	{
 		Debug.Log(point);        // <= 追記
 		score = score + point;
+		stege2.Clearscene(score);
 		GetComponent<Text>().text = "Score: " + score.ToString();
 	}
 }

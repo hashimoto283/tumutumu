@@ -20,15 +20,15 @@ public class sukill : MonoBehaviour
     }
     private void SetSkill()
     {
-        switch (GameDate.instance.skilltype)
+        switch (GameData.instance.skilltype)
         {
-            case GameDate.SkillType.Timer:
+            case GameData.SkillType.Timer:
                 buttonskill.onClick.AddListener(Timer);
                 break;
-            case GameDate.SkillType.ChangeColor:
+            case GameData.SkillType.ChangeColor:
                 buttonskill.onClick.AddListener(ChangeColorSkill);
                 break;
-            case GameDate.SkillType.DeleteBall:
+            case GameData.SkillType.DeleteBall:
                 buttonskill.onClick.AddListener(DeleteBallSkill);
                 break;
         }

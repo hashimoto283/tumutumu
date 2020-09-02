@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameDate : MonoBehaviour
+public class GameData : MonoBehaviour
 {
-    public static GameDate instance;
+    public static GameData instance;
     public enum SkillType
     {
         Timer,
@@ -14,6 +14,12 @@ public class GameDate : MonoBehaviour
     }
     public SkillType skilltype;
 
+    public class CharaData
+    {
+        public string name;
+        public int no1;
+        public GameData.SkillType skillType;
+    }
     void Awake()
     {
         if (instance == null)

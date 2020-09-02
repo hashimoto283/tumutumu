@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class CallmainScript : MonoBehaviour
 {
 
@@ -8,7 +8,7 @@ public class CallmainScript : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			Application.LoadLevel("tumutumu");
+			SceneManager.LoadScene("tumutumu");
 		}
 	}
 }
