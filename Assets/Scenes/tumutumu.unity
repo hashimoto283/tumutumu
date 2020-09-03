@@ -832,7 +832,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3072\u3088\u3053Exchange!"
+  m_Text: ballExchange!
 --- !u!222 &707129820
 CanvasRenderer:
   m_ObjectHideFlags: 0

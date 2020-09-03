@@ -14,31 +14,47 @@ public class GameData : MonoBehaviour
     }
     public SkillType skilltype;
 
+    [System.Serializable]
     public class CharaData
     {
         public string name;
-        public int no1;
-        public GameData.SkillType skillType;
+        public int charaNo;
+        public int skillNo;
     }
-    void Awake()
-    {
-        if (instance == null)
+        public List<CharaData> charaDataList = new List<CharaData>();
+        [System.Serializable]
+        public class SkillData
         {
-            instance = this;
+            public int skillNo;
+            public SkillType skillType;
+            public string description;
+        }
+        public List<SkillData> skillDataList = new List<SkillData>();
+        public CharaButtonGenerator charaButtonGenerator;
+
+        void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        //キャラボタンの生成
+        
+             charaButtonGenerator.GenerateCharaButtons(charaDataList.Count);
+        Debug.Log("a");
+    }
+        // Start is called before the first frame update
+        void Start()
+        {
             DontDestroyOnLoad(gameObject);
-
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
-    // Update is called once per frame
-   
+        // Update is called once per frame
+    
 }

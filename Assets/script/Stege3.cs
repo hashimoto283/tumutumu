@@ -19,7 +19,7 @@ public class Stege3 : MonoBehaviour
         Debug.Log(score);
         ScoreScript = GameObject.Find("Score").GetComponent< ScoreScript > ();
        
-        if (score>=3000)
+        if (score>=5000)
         {
             Debug.Log("s");
             gameClear = true;
@@ -35,7 +35,7 @@ public class Stege3 : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                SceneManager.LoadScene("Stege2");
+                SceneManager.LoadScene("Stege3");
             }
         }
     }
