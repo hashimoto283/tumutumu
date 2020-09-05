@@ -8,44 +8,49 @@ public class TimeScript : MonoBehaviour
 
 	private float time = 60;
 	public ballScript BallScript;
-	//********** 追記 **********// 
 	public GameObject exchangeButton;
 	public GameObject gameOverText;
 	public GameObject sukiruButton;
-	//********** 追記 **********//
 	public Text timeText;
 	void Start()
 	{
-		//********** 追記 **********// 
+	//ゲームオーバー時のテキストを消す
 		gameOverText.SetActive(false);
-		//********** 追記 **********// 
+		
 		timeText = GetComponent<Text>();
+		//テキストに時間を表示する
 		timeText.text = ((int)time).ToString();
 	}
 
      public void Update()
 	{
+		//制限時間を減らす
 		time -= Time.deltaTime;
-		//********** 追記 **********// 
+		
 		if (time < 0)
 		{
 			StartCoroutine("GameOver");
 		}
-		//********* 追記 **********// 
+		
 		if (time < 0) time = 0;
+		//時間が0になるまで制限時間を表示
 		 timeText.text = ((int)time).ToString();
 	}
-	//********** 追記 **********// 
+	
 	IEnumerator GameOver()
 	{
 		gameOverText.SetActive(true);
+		//exchange使用不可
 		exchangeButton.GetComponent<Button>().interactable = false;
+		//消せないようにする
 		BallScript.isPlaying = false;
 		yield return new WaitForSeconds(2.0f);
 		if (Input.GetMouseButtonDown(0))
 		{
 			string sceneName = SceneManager.GetActiveScene().name;
-			SceneManager.LoadScene("sceneName");
+			SceneManager.LoadScene(sceneName);
+			Debug.Log("d");
+
 		}
 	}
 	public void AddTime(float amountTime)

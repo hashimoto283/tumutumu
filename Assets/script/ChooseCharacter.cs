@@ -17,13 +17,14 @@ public class ChooseCharacter : MonoBehaviour
 		foreach(GameData.CharaData charaData in GameData.instance.charaDataList)
         {
 			if(charaData.charaNo ==no)
-            {
+            {　//キャラの画像設定
 				charaImage.sprite = Resources.Load<Sprite>("chara_" + charaData.charaNo);
 				foreach(GameData.SkillData skillData in GameData.instance.skillDataList)
-                {
+                {　　//スキルとキャラを合わせる
 					if(skillData.skillNo == charaData.skillNo)
                     {
 						charaSkillType = skillData.skillType;
+						//スキル説明
 						skillDescription.text = skillData.description;
 						break;
                     }
@@ -36,7 +37,7 @@ public class ChooseCharacter : MonoBehaviour
 
  public	void OnClickChooseSkill()
 	{
-
+		//キャラを選択後にゲームシーンに飛ぶ
 		GameData.instance.skilltype = charaSkillType;
 		SceneManager.LoadScene("tumutumu");
 

@@ -22,6 +22,7 @@ public class sukill : MonoBehaviour
     {
         switch (GameData.instance.skilltype)
         {
+            //スキルボタンを押した時に適切なスキルを入れるためにAddListenerで処理を書く
             case GameData.SkillType.Timer:
                 buttonskill.onClick.AddListener(Timer);
                 break;
@@ -42,7 +43,7 @@ public class sukill : MonoBehaviour
 
 
 
-
+            
             timeScript.AddTime(additionalTime);
             Debug.Log("a");
             SukillCount--;

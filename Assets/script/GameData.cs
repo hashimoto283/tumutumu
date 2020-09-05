@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameData : MonoBehaviour
 {
     public static GameData instance;
+    //各スキルを列挙
     public enum SkillType
     {
         Timer,
@@ -17,23 +18,28 @@ public class GameData : MonoBehaviour
     [System.Serializable]
     public class CharaData
     {
+        //各キャラの名前と番号とスキルを紐づけ
         public string name;
         public int charaNo;
         public int skillNo;
     }
+    　　//Listで管理
         public List<CharaData> charaDataList = new List<CharaData>();
         [System.Serializable]
         public class SkillData
         {
+           //スキルのナンバーとスキル内容と説明テキストを紐づけ
             public int skillNo;
             public SkillType skillType;
             public string description;
         }
+    　　//Listで管理
         public List<SkillData> skillDataList = new List<SkillData>();
         public CharaButtonGenerator charaButtonGenerator;
 
         void Awake()
         {
+    　　　　//各キャラと各スキルを全て生成
             if (instance == null)
             {
                 instance = this;
@@ -49,12 +55,6 @@ public class GameData : MonoBehaviour
              charaButtonGenerator.GenerateCharaButtons(charaDataList.Count);
         Debug.Log("a");
     }
-        // Start is called before the first frame update
-        void Start()
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-
-        // Update is called once per frame
+    
     
 }

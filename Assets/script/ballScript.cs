@@ -21,22 +21,20 @@ public class ballScript : MonoBehaviour
 	public GameObject scoreGUI;
 	private int point = 100;
 	public GameObject exchangeButton;
-	//********** 追記 **********//
 	public bool isPlaying = true;
-	//********** 追記 **********//
 	private BallController ballController;
 
 	void Start()
 	{
+		//始めにボールを50個生成
 		StartCoroutine(DropBall(50));
 	}
 
 	void Update()
 	{
-		//********** 追記 **********//
 		if (isPlaying)
 		{
-			//********** 追記 **********//
+			
 			if (Input.GetMouseButtonDown(0) && firstBall == null)
 			{
 				OnDragStart();
@@ -49,23 +47,27 @@ public class ballScript : MonoBehaviour
 			{
 				OnDragging();
 			}
-			//********** 追記 **********//
+			
 		}
-		//********** 追記 **********//
+		
 	}
 
 	public void OnDragStart()
 	{
+		//RayCastHit2Dでクリックしたボールの位置情報を取得
 		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
 		if (hit.collider != null)
 		{
+			
 			GameObject hitObj = hit.collider.gameObject;
 			string ballName = hitObj.name;
+			//ボールの名前がPiyoかどうか判別
 			if (ballName.StartsWith("Piyo"))
 			{
 				firstBall = hitObj;
 				lastBall = hitObj;
+				//currentNameにドラッグしたボールを格納
 				currentName = hitObj.name;
 				removableBallList = new List<GameObject>();
 				PushToList(hitObj);
@@ -79,9 +81,10 @@ public class ballScript : MonoBehaviour
 		if (hit.collider != null)
 		{
 			GameObject hitObj = hit.collider.gameObject;
-
+			//取得したオブジェクトとcurrentNameが同じで最後のボールが別のオブジェクトの場合
 			if (hitObj.name == currentName && lastBall != hitObj)
-			{
+			{　　
+				//hitballとlastballの距離を測る
 				float distance = Vector2.Distance(hitObj.transform.position, lastBall.transform.position);
 				if (distance < 1.0f)
 				{
@@ -94,10 +97,11 @@ public class ballScript : MonoBehaviour
 
 	public void OnDragEnd()
 	{
+		//消したボールを管理し、3個以上なら削除
 		int remove_cnt = removableBallList.Count;
 		if (remove_cnt >= 3)
 		{
-
+			//消したボールを各色のボールリストに格納
 			GameObject removableobj = removableBallList[0];
 			if (ballList_yellow.Count > 0 && ballList_yellow[0].name.StartsWith(removableobj.name))
 			{
@@ -155,11 +159,13 @@ public class ballScript : MonoBehaviour
 		}
 		else
 		{
+			//消したボールのListの初期化
 			for (int i = 0; i < remove_cnt; i++)
 			{
 				ChangeColor(removableBallList[i], 1.0f);
 			}
 		}
+		//ChangeColorを使ってもDragされてない状態にする
 		firstBall = null;
 		lastBall = null;
 	}
@@ -167,7 +173,7 @@ public class ballScript : MonoBehaviour
 	public IEnumerator DropBall(int count)
 	{
 
-
+		//countが50の場合のみRestrictPushを呼び出す
 		if (count == 50)
 		{
 			StartCoroutine("RestrictPush");
@@ -231,7 +237,7 @@ public class ballScript : MonoBehaviour
 			ballList_yellow[i].name = "Piyo" + 1;
 			ballList_blue.Add(ballList_yellow[i]);
 			Debug.Log(ballList_yellow.Count);
-			//ballList_yellow.Remove(ballList_yellow[i]);
+			
 
 
 		}
@@ -240,7 +246,9 @@ public class ballScript : MonoBehaviour
 	}
 	IEnumerator RestrictPush()
 	{
+		
 		exchangeButton.GetComponent<Button>().interactable = false;
+		//exchangeは5秒のインターバルがあるようにする
 		yield return new WaitForSeconds(5.0f);
 		exchangeButton.GetComponent<Button>().interactable = true;
 	}
@@ -261,6 +269,7 @@ public class ballScript : MonoBehaviour
 	}
 	public void DeleteBall()
 	{
+		//各ボールを配列で管理
 		int[] array = new int[5];
 		array[0] = ballList_yellow.Count;
 		array[1] = ballList_blue.Count;
@@ -326,7 +335,7 @@ public class ballScript : MonoBehaviour
 			}
 			ballList_purple.Clear();
 		}
-
+		//消した個数を新しくボールを落とす
 		StartCoroutine(DropBall(maxNum));
 	scoreGUI.SendMessage("AddPoint", point * maxNum);
 	}

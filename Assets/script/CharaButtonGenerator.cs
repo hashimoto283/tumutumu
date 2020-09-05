@@ -12,6 +12,7 @@ public class CharaButtonGenerator : MonoBehaviour
 
     public void GenerateCharaButtons(int count)
     {
+        //キャラを全部生成する処理
         for(int i =0;i<count;i++)
         {
             ChooseCharacter charaButton = Instantiate(charaButtonPrefab, charaTran, false);
