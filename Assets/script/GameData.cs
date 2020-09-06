@@ -11,11 +11,11 @@ public class GameData : MonoBehaviour
         Timer,
         ChangeColor,
         DeleteBall,
-
     }
-    public SkillType skilltype;
 
+    public SkillType skilltype;
     [System.Serializable]
+
     public class CharaData
     {
         //各キャラの名前と番号とスキルを紐づけ
@@ -44,17 +44,13 @@ public class GameData : MonoBehaviour
             {
                 instance = this;
                 DontDestroyOnLoad(gameObject);
-
             }
             else
             {
                 Destroy(gameObject);
             }
         //キャラボタンの生成
-        
              charaButtonGenerator.GenerateCharaButtons(charaDataList.Count);
-        Debug.Log("a");
+             Debug.Log("a");
     }
-    
-    
 }

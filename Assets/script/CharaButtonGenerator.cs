@@ -9,7 +9,6 @@ public class CharaButtonGenerator : MonoBehaviour
     [Header("キャラボタンの生成位置")]
     public Transform charaTran;
 
-
     public void GenerateCharaButtons(int count)
     {
         //キャラを全部生成する処理
@@ -19,5 +18,4 @@ public class CharaButtonGenerator : MonoBehaviour
             charaButton.SetUpCharaButton(i);
         }
     }
- 
 }

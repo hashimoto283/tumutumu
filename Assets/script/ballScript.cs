@@ -11,18 +11,19 @@ public class ballScript : MonoBehaviour
 	public List<GameObject> ballList_red = new List<GameObject>();
 	public List<GameObject> ballList_green = new List<GameObject>();
 	public List<GameObject> ballList_purple = new List<GameObject>();
-
+	public int remove_cnt;
 	public GameObject ballPrefab;
 	public Sprite[] ballSprites;
 	private GameObject firstBall;
 	private GameObject lastBall;
 	private string currentName;
-	List<GameObject> removableBallList = new List<GameObject>();
+	public List<GameObject> removableBallList = new List<GameObject>();
 	public GameObject scoreGUI;
 	private int point = 100;
 	public GameObject exchangeButton;
 	public bool isPlaying = true;
 	private BallController ballController;
+	private bool isDraging=true;
 
 	void Start()
 	{
@@ -32,12 +33,11 @@ public class ballScript : MonoBehaviour
 
 	void Update()
 	{
-		if (isPlaying)
+		if (isPlaying&&isDraging)
 		{
-			
 			if (Input.GetMouseButtonDown(0) && firstBall == null)
 			{
-				OnDragStart();
+				OnDragStart();;
 			}
 			else if (Input.GetMouseButtonUp(0))
 			{
@@ -47,19 +47,15 @@ public class ballScript : MonoBehaviour
 			{
 				OnDragging();
 			}
-			
 		}
-		
 	}
 
 	public void OnDragStart()
 	{
 		//RayCastHit2Dでクリックしたボールの位置情報を取得
 		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
 		if (hit.collider != null)
 		{
-			
 			GameObject hitObj = hit.collider.gameObject;
 			string ballName = hitObj.name;
 			//ボールの名前がPiyoかどうか判別
@@ -97,10 +93,11 @@ public class ballScript : MonoBehaviour
 
 	public void OnDragEnd()
 	{
-		//消したボールを管理し、3個以上なら削除
+		//ドラッグしたボールが3個以上なら削除
 		int remove_cnt = removableBallList.Count;
 		if (remove_cnt >= 3)
 		{
+			Debug.Log(remove_cnt);
 			//消したボールを各色のボールリストに格納
 			GameObject removableobj = removableBallList[0];
 			if (ballList_yellow.Count > 0 && ballList_yellow[0].name.StartsWith(removableobj.name))
@@ -138,7 +135,6 @@ public class ballScript : MonoBehaviour
 				{
 					ballList_green.Remove(removableBallList[i]);
 					Destroy(removableBallList[i]);
-
 				}
 			}
 			else if (ballList_purple.Count > 0 && ballList_purple[0].name.StartsWith(removableobj.name))
@@ -150,15 +146,13 @@ public class ballScript : MonoBehaviour
 					Destroy(removableBallList[i]);
 				}
 			}
-			removableBallList = new List<GameObject>();
+	        removableBallList = new List<GameObject>();
 			scoreGUI.SendMessage("AddPoint", point * remove_cnt);
 			StartCoroutine(DropBall(remove_cnt));
-
-
-
 		}
 		else
 		{
+			Debug.Log(remove_cnt);
 			//消したボールのListの初期化
 			for (int i = 0; i < remove_cnt; i++)
 			{
@@ -172,7 +166,7 @@ public class ballScript : MonoBehaviour
 
 	public IEnumerator DropBall(int count)
 	{
-
+		isDraging = false;
 		//countが50の場合のみRestrictPushを呼び出す
 		if (count == 50)
 		{
@@ -216,37 +210,27 @@ public class ballScript : MonoBehaviour
 			{
 				ballList_purple.Add(ball);
 			}
-
-
 			//0.05秒停止する処理
 			yield return new WaitForSeconds(0.05f);
-
-
-
 		}
-
+		isDraging = true;
 	}
+
 	public void ChangeColor()
 	{
-
 		//ボールリストナンバーイエローをボールリストナンバーブルーに変更
 		for (int i = 0; i < ballList_yellow.Count; i++)
 		{
 			ballList_yellow[i].GetComponent<SpriteRenderer>().sprite = ballSprites[1];
-
 			ballList_yellow[i].name = "Piyo" + 1;
 			ballList_blue.Add(ballList_yellow[i]);
 			Debug.Log(ballList_yellow.Count);
-			
-
-
 		}
 		ballList_yellow.Clear();
-
 	}
+
 	IEnumerator RestrictPush()
 	{
-		
 		exchangeButton.GetComponent<Button>().interactable = false;
 		//exchangeは5秒のインターバルがあるようにする
 		yield return new WaitForSeconds(5.0f);
@@ -262,11 +246,9 @@ public class ballScript : MonoBehaviour
 	void ChangeColor(GameObject obj, float transparency)
 	{
 		SpriteRenderer ballTexture = obj.GetComponent<SpriteRenderer>();
-		ballTexture.color = new Color(ballTexture.color.r, ballTexture.color.g, ballTexture.color.b, transparency);
-
-
-
+		ballTexture.color = new Color(ballTexture.color.r, ballTexture.color.g, ballTexture.color.b, transparency);;
 	}
+
 	public void DeleteBall()
 	{
 		//各ボールを配列で管理
@@ -289,12 +271,10 @@ public class ballScript : MonoBehaviour
 		}
 		Debug.Log(maxNum);
 		Debug.Log(index);
-
 		if (index == 0)
 		{
 			for (int i = 0; i < ballList_yellow.Count; i++)
             {
-				
 				Destroy(ballList_yellow[i]);
 			}
 			ballList_yellow.Clear();
@@ -303,7 +283,6 @@ public class ballScript : MonoBehaviour
 		{
 			for (int i = 0; i < ballList_blue.Count; i++)
 			{
-				
 				Destroy(ballList_blue[i]);
 			}
 			ballList_blue.Clear();
@@ -312,7 +291,6 @@ public class ballScript : MonoBehaviour
         {
 			for (int i = 0; i < ballList_red.Count; i++)
 			{
-				
 				Destroy(ballList_red[i]);
 			}
 			ballList_red.Clear();
@@ -321,7 +299,6 @@ public class ballScript : MonoBehaviour
         {
 			for (int i = 0; i < ballList_green.Count; i++)
 			{
-				
 				Destroy(ballList_green[i]);
 			}
 			ballList_green.Clear();
@@ -330,7 +307,6 @@ public class ballScript : MonoBehaviour
         {
 			for (int i = 0; i < ballList_purple.Count; i++)
 			{
-				
 				Destroy(ballList_purple[i]);
 			}
 			ballList_purple.Clear();

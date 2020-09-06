@@ -2,18 +2,21 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+
 public class ScoreScript : MonoBehaviour
 {
 	private int score = 0;
 	public Stege2 stege2;
 	public Stege3 stege3;
 	public Stege4 stege4;
+
 	void Start()
 	{
 		//初期スコア(0点)を表示
 		GetComponent<Text>().text = "Score: " + score.ToString();
 	}
 	//ballScriptからSendMessageで呼ばれるスコア加算用メソッド
+
 	public void AddPoint(int point)
 	{
 		Debug.Log(point);       
@@ -32,7 +35,6 @@ public class ScoreScript : MonoBehaviour
 			stege4.Clearscene(score);
         }
 		Debug.Log("st");
-
 		score = score + point;
 		GetComponent<Text>().text = "Score: " + score.ToString();
 	}

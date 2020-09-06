@@ -33,13 +33,11 @@ public class ChooseCharacter : MonoBehaviour
             }
         }
     }
-	
 
  public	void OnClickChooseSkill()
 	{
 		//キャラを選択後にゲームシーンに飛ぶ
 		GameData.instance.skilltype = charaSkillType;
 		SceneManager.LoadScene("tumutumu");
-
 		}
 }

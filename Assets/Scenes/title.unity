@@ -374,7 +374,7 @@ MonoBehaviour:
   skillDataList:
   - skillNo: 0
     skillType: 0
-    description: "\u30B9\u30AD\u30EB\u3092\u4F7F\u3046\u306830\u79D2\u5236\u9650\u6642\u9593\u304C\u5897\u3048\u308B"
+    description: "30\u79D2\u5236\u9650\u6642\u9593\u304C\u5897\u3048\u308B"
   - skillNo: 1
     skillType: 1
     description: "\u9EC4\u8272\u306E\u30DC\u30FC\u30EB\u304C\u9752\u8272\u306B\u5909\u5316\u3059\u308B"

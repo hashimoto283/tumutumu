@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 public class ExchangeScript : MonoBehaviour
 {
-	public ballScript BallScript; 
- 
-    public void Exchange()
+	public ballScript BallScript;
+
+	public void Exchange()
 	{
 		//配列に「respawn」タグのついているオブジェクトを全て格納
 		GameObject[] piyos = GameObject.FindGameObjectsWithTag("Respawn");
@@ -20,9 +20,7 @@ public class ExchangeScript : MonoBehaviour
 		BallScript.ballList_red = new List<GameObject>();
 		BallScript.ballList_green = new List<GameObject>();
 		BallScript.ballList_purple = new List<GameObject>();
-
+		BallScript.removableBallList.Clear();
 		StartCoroutine(BallScript.DropBall(50));
-	
 	}
-
 }
