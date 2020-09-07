@@ -964,6 +964,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 66cdd59dc5279e948bae5b1ccf560cb6, type: 3}
   - {fileID: 21300000, guid: 0f88658e88092ed4ab72658c971ebb50, type: 3}
   - {fileID: 21300000, guid: 731455379df79274ca6316bc1c783a3c, type: 3}
+  removableBallList: []
   scoreGUI: {fileID: 1211575871}
   exchangeButton: {fileID: 1536257961}
   isPlaying: 1
@@ -1258,9 +1259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87cb98d6048b4854e8a29210731c2148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stege2: {fileID: 0}
-  stege3: {fileID: 0}
-  stege4: {fileID: 1270275530}
+  stageManager: {fileID: 1270275533}
+  scoreText: {fileID: 1211575874}
 --- !u!1 &1270275528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1273,7 @@ GameObject:
   - component: {fileID: 1270275532}
   - component: {fileID: 1270275531}
   - component: {fileID: 1270275530}
+  - component: {fileID: 1270275533}
   m_Layer: 5
   m_Name: Clear
   m_TagString: Untagged
@@ -1353,6 +1354,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270275528}
   m_CullTransparentMesh: 0
+--- !u!114 &1270275533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270275528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbb19a501a6a074bac777db7a008d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneName: 3
+  Clear: {fileID: 1270275531}
 --- !u!1 &1317176082
 GameObject:
   m_ObjectHideFlags: 0

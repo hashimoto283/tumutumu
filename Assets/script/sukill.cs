@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class sukill : MonoBehaviour
 {
+    //追加する制限時間の秒数
     public float additionalTime;
     private TimeScript timeScript;
     private ballScript ballScript;
+    //スキルの使用回数
     public int SukillCount;
+    //ボタンを押すとスキルが発動する処理
     private Button buttonskill;
 
     private void Start()
@@ -16,6 +19,9 @@ public class sukill : MonoBehaviour
         buttonskill = GetComponent<Button>();
         SetSkill();
     }
+    /// <summary>
+    /// スキルの個数設定
+    /// </summary>
 
     private void SetSkill()
     {
@@ -33,39 +39,47 @@ public class sukill : MonoBehaviour
                 break;
         }
     }
+    /// <summary>
+    /// 制限時間を増やすスキル処理
+    /// </summary>
 
     public void Timer()
     {
-        if (SukillCount > 0)
-        {
-            timeScript = GameObject.Find("Time").GetComponent<TimeScript>();
-            timeScript.AddTime(additionalTime);
-            Debug.Log("a");
-            SukillCount--;
-            buttonskill.interactable = false;
-        }
+        TrigggerSkill();
+        timeScript.AddTime(additionalTime);
+
     }
+    /// <summary>
+    /// ボールの色を変更するスキル処理
+    /// </summary>
 
     public void ChangeColorSkill()
     {
+        TrigggerSkill();
+        ballScript.ChangeColor();
+    }
+    /// <summary>
+    /// 一番多いボールを消すスキル処理
+    /// </summary>
+
+    public void DeleteBallSkill()
+    {
+        TrigggerSkill();
+        ballScript.DeleteBall();
+    }
+    /// <summary>
+    /// スキルの使用回数を決める処理
+    /// </summary>
+
+    private void TrigggerSkill()
+    {
+        // スキルの使用回数確認
         if (SukillCount > 0)
         {
             ballScript = GameObject.Find("Main Camera").GetComponent<ballScript>();
-            ballScript.ChangeColor();
-            Debug.Log("a");
             SukillCount--;
             buttonskill.interactable = false;
         }
     }
 
-    public void DeleteBallSkill()
-    {
-        if (SukillCount > 0)
-        {
-            ballScript = GameObject.Find("Main Camera").GetComponent<ballScript>();
-            ballScript.DeleteBall();
-            SukillCount--;
-            buttonskill.interactable = false;
-        }
-    }
 }

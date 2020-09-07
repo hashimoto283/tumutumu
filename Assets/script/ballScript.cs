@@ -11,7 +11,6 @@ public class ballScript : MonoBehaviour
 	public List<GameObject> ballList_red = new List<GameObject>();
 	public List<GameObject> ballList_green = new List<GameObject>();
 	public List<GameObject> ballList_purple = new List<GameObject>();
-	public int remove_cnt;
 	public GameObject ballPrefab;
 	public Sprite[] ballSprites;
 	private GameObject firstBall;
@@ -22,7 +21,6 @@ public class ballScript : MonoBehaviour
 	private int point = 100;
 	public GameObject exchangeButton;
 	public bool isPlaying = true;
-	private BallController ballController;
 	private bool isDraging=true;
 
 	void Start()
@@ -33,7 +31,8 @@ public class ballScript : MonoBehaviour
 
 	void Update()
 	{
-		if (isPlaying&&isDraging)
+		// ゲームオーバーではなく、ボールの生成が行われていない場合
+		if (isPlaying && isDraging)
 		{
 			if (Input.GetMouseButtonDown(0) && firstBall == null)
 			{
@@ -49,6 +48,9 @@ public class ballScript : MonoBehaviour
 			}
 		}
 	}
+	/// <summary>
+	/// ボールをドラッグし始めた時に起きる処理
+	/// </summary>
 
 	public void OnDragStart()
 	{
@@ -70,7 +72,10 @@ public class ballScript : MonoBehaviour
 			}
 		}
 	}
-
+	/// <summary>
+	/// ボールをドラッグ中の処理
+	/// </summary>
+	
 	private void OnDragging()
 	{
 		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -90,7 +95,10 @@ public class ballScript : MonoBehaviour
 			}
 		}
 	}
-
+	/// <summary>
+	/// ボールをドラッグし終わったときの処理
+	/// </summary>
+	
 	public void OnDragEnd()
 	{
 		//ドラッグしたボールが3個以上なら削除
@@ -163,6 +171,10 @@ public class ballScript : MonoBehaviour
 		firstBall = null;
 		lastBall = null;
 	}
+	/// <summary>
+	/// ボールを生成するための処理
+	/// </summary>
+	/// <param name="count">ボールを生成する個数</param>
 
 	public IEnumerator DropBall(int count)
 	{
@@ -215,6 +227,9 @@ public class ballScript : MonoBehaviour
 		}
 		isDraging = true;
 	}
+	/// <summary>
+	/// ボールの色を変更する処理
+	/// </summary>
 
 	public void ChangeColor()
 	{
@@ -228,6 +243,9 @@ public class ballScript : MonoBehaviour
 		}
 		ballList_yellow.Clear();
 	}
+	/// <summary>
+	/// Exchangeボタンを押した時の処理
+	/// </summary>
 
 	IEnumerator RestrictPush()
 	{
@@ -236,18 +254,31 @@ public class ballScript : MonoBehaviour
 		yield return new WaitForSeconds(5.0f);
 		exchangeButton.GetComponent<Button>().interactable = true;
 	}
-
+	/// <summary>
+	/// ボールをドラッグして選択したときにわかりやすいように透けるようにする
+	/// </summary>
+	/// <param name="obj">ボール</param>
+	
 	void PushToList(GameObject obj)
 	{
 		removableBallList.Add(obj);
+		//色の透明度を50％落とす
 		ChangeColor(obj, 0.5f);
 	}
+    /// <summary>
+	/// ボールのオブジェクトの透明度を変更する
+	/// </summary>
+	/// <param name="obj">透明度を変えるボール</param>
+	/// <param name="transparency">透明の度合</param>
 
 	void ChangeColor(GameObject obj, float transparency)
 	{
 		SpriteRenderer ballTexture = obj.GetComponent<SpriteRenderer>();
 		ballTexture.color = new Color(ballTexture.color.r, ballTexture.color.g, ballTexture.color.b, transparency);;
 	}
+	/// <summary>
+	/// スキルでボールを消すときの処理
+	/// </summary>
 
 	public void DeleteBall()
 	{
@@ -313,6 +344,6 @@ public class ballScript : MonoBehaviour
 		}
 		//消した個数を新しくボールを落とす
 		StartCoroutine(DropBall(maxNum));
-	scoreGUI.SendMessage("AddPoint", point * maxNum);
+	　　scoreGUI.SendMessage("AddPoint", point * maxNum);
 	}
 }

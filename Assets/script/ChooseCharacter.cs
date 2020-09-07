@@ -12,6 +12,11 @@ public class ChooseCharacter : MonoBehaviour
 	public Image charaImage;
 	[Header("キャラの説明表示")]
 	public Text skillDescription;
+	/// <summary>
+	/// タイトルでキャラとスキルを選択するための処理
+	/// </summary>
+	/// <param name="no">キャラとスキルの番号づけ</param>
+
 	public void SetUpCharaButton(int no)
     {
 		foreach(GameData.CharaData charaData in GameData.instance.charaDataList)
@@ -33,11 +38,14 @@ public class ChooseCharacter : MonoBehaviour
             }
         }
     }
-
- public	void OnClickChooseSkill()
+	/// <summary>
+	/// キャラを選ぶとスキルに紐づける
+	/// </summary>
+ 
+	public	void OnClickChooseSkill()
 	{
 		//キャラを選択後にゲームシーンに飛ぶ
 		GameData.instance.skilltype = charaSkillType;
 		SceneManager.LoadScene("tumutumu");
-		}
+    }
 }

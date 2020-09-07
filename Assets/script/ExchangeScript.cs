@@ -5,6 +5,10 @@ public class ExchangeScript : MonoBehaviour
 {
 	public ballScript BallScript;
 
+	/// <summary>
+	///ボールをExchangeするときの処理 
+	/// </summary>
+	
 	public void Exchange()
 	{
 		//配列に「respawn」タグのついているオブジェクトを全て格納
