@@ -18,12 +18,12 @@ public class StageManager : MonoBehaviour
     public SceneName nextSceneName;
     private bool gameClear = false;
     public Text Clear;
+
     /// <summary>
     /// ステージクリアの得点に達しているか判定
     /// </summary>
     /// <param name="sceneName">現在のシーンの名前</param>
     /// <param name="score">判定するスコアの値</param>
-
     public void CheckClearStage(string sceneName, int score)
     {
         Debug.Log(sceneName);
@@ -39,12 +39,12 @@ public class StageManager : MonoBehaviour
             Time.timeScale = 0;
         }
     }
+
     /// <summary>
     /// シーンの名前を使ってそのシーンをクリアするための判定値を戻す
     /// </summary>
     /// <param name="sceneName">現在のシーンの名前</param>
     /// <returns></returns>
-
     private int GetStageClearScore(string sceneName)
     {
         int value = 0;

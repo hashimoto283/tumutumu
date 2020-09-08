@@ -33,10 +33,10 @@ public class TimeScript : MonoBehaviour
 		//時間が0になるまで制限時間を表示
 		 timeText.text = ((int)time).ToString();
 	}
+
 	/// <summary>
 	/// ゲームオーバー時の処理
 	/// </summary>
-
 	IEnumerator GameOver()
 	{
 		gameOverText.SetActive(true);
@@ -52,11 +52,11 @@ public class TimeScript : MonoBehaviour
 			Debug.Log("continue scene");
 		}
 	}
+
 	/// <summary>
 	/// 制限時間を追加する処理
 	/// </summary>
 	/// <param name="amountTime">追加する時間の秒数</param>
-
 	public void AddTime(float amountTime)
 	{
 		Debug.Log(amountTime);

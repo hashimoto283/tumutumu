@@ -19,10 +19,10 @@ public class sukill : MonoBehaviour
         buttonskill = GetComponent<Button>();
         SetSkill();
     }
+
     /// <summary>
     /// スキルの個数設定
     /// </summary>
-
     private void SetSkill()
     {
         switch (GameData.instance.skilltype)
@@ -39,20 +39,20 @@ public class sukill : MonoBehaviour
                 break;
         }
     }
+
     /// <summary>
     /// 制限時間を増やすスキル処理
     /// </summary>
-
     public void Timer()
     {
         TrigggerSkill();
         timeScript.AddTime(additionalTime);
 
     }
+
     /// <summary>
     /// ボールの色を変更するスキル処理
     /// </summary>
-
     public void ChangeColorSkill()
     {
         TrigggerSkill();
@@ -67,10 +67,10 @@ public class sukill : MonoBehaviour
         TrigggerSkill();
         ballScript.DeleteBall();
     }
+
     /// <summary>
     /// スキルの使用回数を決める処理
     /// </summary>
-
     private void TrigggerSkill()
     {
         // スキルの使用回数確認

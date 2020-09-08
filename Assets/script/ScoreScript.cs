@@ -16,11 +16,11 @@ public class ScoreScript : MonoBehaviour
 		//初期スコア(0点)を表示
 		GetComponent<Text>().text = "Score: " + score.ToString();
 	}
+
 	/// <summary>
 	/// スコアの加算処理
 	/// </summary>
 	/// <param name="point">ボールを消すときに増えるスコアの数</param>
-
 	public void AddPoint(int point)
 	{
 		Debug.Log(point);
@@ -31,6 +31,5 @@ public class ScoreScript : MonoBehaviour
 		string sceneName = SceneManager.GetActiveScene().name;
 		// クリアしているスコアに達したか判定
 		stageManager.CheckClearStage(sceneName, score);
-		
 	}
 }
