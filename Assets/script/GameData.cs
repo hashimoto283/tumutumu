@@ -12,7 +12,6 @@ public class GameData : MonoBehaviour
         ChangeColor,
         DeleteBall,
     }
-
     public SkillType skilltype;
     [System.Serializable]
 
