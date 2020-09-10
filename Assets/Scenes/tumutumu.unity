@@ -231,7 +231,7 @@ MonoBehaviour:
   BallScript: {fileID: 837790347}
   exchangeButton: {fileID: 1536257961}
   gameOverText: {fileID: 57359969}
-  sukiruButton: {fileID: 424740710}
+  sukillButton: {fileID: 424740710}
   timeText: {fileID: 50724544}
 --- !u!1 &57359969
 GameObject:
@@ -338,7 +338,6 @@ GameObject:
   - component: {fileID: 64048247}
   - component: {fileID: 64048249}
   - component: {fileID: 64048248}
-  - component: {fileID: 64048250}
   - component: {fileID: 64048251}
   m_Layer: 5
   m_Name: Clear
@@ -407,19 +406,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64048246}
   m_CullTransparentMesh: 0
---- !u!114 &64048250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 64048246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4848aa2b8a7f0c1418d00139eb450c31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Clear: {fileID: 64048248}
 --- !u!114 &64048251
 MonoBehaviour:
   m_ObjectHideFlags: 0

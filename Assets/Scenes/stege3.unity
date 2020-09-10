@@ -231,7 +231,7 @@ MonoBehaviour:
   BallScript: {fileID: 837790347}
   exchangeButton: {fileID: 1536257961}
   gameOverText: {fileID: 57359969}
-  sukiruButton: {fileID: 424740710}
+  sukillButton: {fileID: 424740710}
   timeText: {fileID: 50724544}
 --- !u!1 &57359969
 GameObject:

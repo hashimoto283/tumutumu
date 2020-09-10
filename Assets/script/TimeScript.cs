@@ -9,7 +9,7 @@ public class TimeScript : MonoBehaviour
 	public ballScript BallScript;
 	public GameObject exchangeButton;
 	public GameObject gameOverText;
-	public GameObject sukiruButton;
+	public GameObject sukillButton;
 	public Text timeText;
 
 	void Start()

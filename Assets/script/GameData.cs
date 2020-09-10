@@ -50,6 +50,5 @@ public class GameData : MonoBehaviour
             }
         //キャラボタンの生成
              charaButtonGenerator.GenerateCharaButtons(charaDataList.Count);
-             Debug.Log("a");
     }
 }
