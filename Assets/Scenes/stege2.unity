@@ -670,6 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   additionalTime: 30
+  timeScript: {fileID: 50724546}
   SukillCount: 1
 --- !u!1 &707129817
 GameObject:

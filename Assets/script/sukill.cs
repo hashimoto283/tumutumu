@@ -7,7 +7,7 @@ public class sukill : MonoBehaviour
 {
     //追加する制限時間の秒数
     public float additionalTime;
-    private TimeScript timeScript;
+    public TimeScript timeScript;
     private ballScript ballScript;
     //スキルの使用回数
     public int SukillCount;
